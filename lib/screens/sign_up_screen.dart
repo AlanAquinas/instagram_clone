@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/resourses/auth_metods.dart';
+import 'package:instagram_clone/screens/login_screen.dart';
 import 'package:instagram_clone/utils/colors.dart';
 
+import '../responsive/mobile_screen_layout.dart';
+import '../responsive/responsive_layout_screeen.dart';
+import '../responsive/web_screen_layout.dart';
 import '../utils/utils.dart';
 import '../widgets/text_field_input.dart';
 
@@ -40,6 +44,11 @@ class _SignupScreenState extends State<SignupScreen> {
     });
   }
 
+  void NavigateToLogin() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+  }
+
   void signUpUser() async {
     setState(() {
       _isLoading = true;
@@ -52,12 +61,22 @@ class _SignupScreenState extends State<SignupScreen> {
       file: _image!,
     );
 
-    if (res == 'success') {
-      showSnacBar(res, context);
-    }
     setState(() {
       _isLoading = false;
     });
+
+    if (res != 'success') {
+      showSnacBar(res, context);
+    } else {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+            mobileScreenLayout: MobileScreenLayout(),
+            webScreenLayout: WebScreenLayout(),
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -186,14 +205,14 @@ class _SignupScreenState extends State<SignupScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  child: const Text("Don't have an account?"),
+                  child: const Text("Do you have an account?"),
                   padding: const EdgeInsets.symmetric(vertical: 8),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: NavigateToLogin,
                   child: Container(
                     child: Text(
-                      "Sign up",
+                      "Log in",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: blueColor,
