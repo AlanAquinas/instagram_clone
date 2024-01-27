@@ -11,10 +11,10 @@ class User {
   final List following;
 
   const User({
-    required this.email,
+    required this.username,
     required this.uid,
     required this.photoUrl,
-    required this.username,
+    required this.email,
     required this.bio,
     required this.followers,
     required this.following,
@@ -34,13 +34,13 @@ class User {
     var snapshot = snap.data() as Map<String, dynamic>;
 
     return User(
-      username: snapshot['username'],
-      uid: snapshot['uid'],
-      email: snapshot['email'],
-      photoUrl: snapshot['photoUrl'],
-      bio: snapshot['bio'],
-      followers: snapshot['followers'],
-      following: snapshot['following'],
+      username: snapshot['username'] ?? '',
+      uid: snapshot['uid'] ?? '',
+      email: snapshot['email'] ?? '',
+      photoUrl: snapshot['photoUrl'] ?? '',
+      bio: snapshot['bio'] ?? '',
+      followers: snapshot['followers'] ?? [],
+      following: snapshot['following'] ?? [],
     );
   }
 }

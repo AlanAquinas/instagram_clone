@@ -14,18 +14,18 @@ import 'screens/sign_up_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (kIsWeb) {
-    await Firebase.initializeApp(
-      options: const FirebaseOptions(
-        apiKey: "AIzaSyC-_9nGAKhCubo5zySlBvGEdyAkTKxRslo",
-        appId: "1:943521146745:web:daea9547fddd81d06d71a8",
-        messagingSenderId: "943521146745",
-        projectId: "instagram-clone-3011e",
-        storageBucket: "instagram-clone-3011e.appspot.com",
-      ),
-    );
-  }
-  await Firebase.initializeApp();
+
+  await Firebase.initializeApp(
+    options: kIsWeb
+        ? FirebaseOptions(
+            apiKey: "AIzaSyC-_9nGAKhCubo5zySlBvGEdyAkTKxRslo",
+            appId: "1:943521146745:web:daea9547fddd81d06d71a8",
+            messagingSenderId: "943521146745",
+            projectId: "instagram-clone-3011e",
+            storageBucket: "instagram-clone-3011e.appspot.com",
+          )
+        : null, // Use default options for non-web platforms
+  );
   runApp(const MyApp());
 }
 

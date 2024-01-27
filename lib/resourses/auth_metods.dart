@@ -46,9 +46,9 @@ class AuthMethods {
         model.User user = model.User(
           username: username,
           uid: cred.user!.uid,
+          photoUrl: photoUrl,
           email: email,
           bio: bio,
-          photoUrl: photoUrl,
           followers: [],
           following: [],
         );
@@ -67,6 +67,8 @@ class AuthMethods {
         // });
 
         res = "success";
+      } else {
+        res = 'Please enter all the fields';
       }
     } catch (err) {
       res = err.toString();
